@@ -45,6 +45,55 @@ public class TestMyAccount {
         }
     }
 
+    @Test
+    public void testMyAccountLanding() {
+        try {
+            String baseUrl = "https://www.suburbia.com.mx";
+            for (int i = 0; i < 1; i++) {
+                driver.get(baseUrl + "/tienda/inicio");
+                waitForPageLoaded();
+                driver.findElement(By.linkText("Inicia sesión")).click();
+                waitForPageLoaded();
+                driver.findElement(By.cssSelector("input.input-material")).click();
+                driver.findElement(By.cssSelector("input.input-material")).sendKeys("obedmhg@gmail.com");
+                driver.findElement(By.cssSelector(".col-12:nth-child(2) .input-material")).sendKeys("obed3333");
+                driver.findElement(By.cssSelector("button.btn-primary-sb.btn-full")).click();
+                driver.get(baseUrl + "/tienda/mi-cuenta");
+                waitForPageLoaded();
+                TestUtils.getScreenshot(driver, "myAccount.jpg");
+                assert driver.findElement(By.xpath("//*[@id=\"__next\"]/div/div[1]/div/div[2]/a")).getText().contains("Datos personales");
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            assert false;
+        }
+    }
+
+    @Test
+    public void testMyCreditCards() {
+        try {
+            String baseUrl = "https://www.suburbia.com.mx";
+            for (int i = 0; i < 1; i++) {
+                driver.get(baseUrl + "/tienda/inicio");
+                waitForPageLoaded();
+                driver.findElement(By.linkText("Inicia sesión")).click();
+                waitForPageLoaded();
+                driver.findElement(By.cssSelector("input.input-material")).click();
+                driver.findElement(By.cssSelector("input.input-material")).sendKeys("obedmhg@gmail.com");
+                driver.findElement(By.cssSelector(".col-12:nth-child(2) .input-material")).sendKeys("obed3333");
+                driver.findElement(By.cssSelector("button.btn-primary-sb.btn-full")).click();
+                driver.get(baseUrl + "/tienda/mi-cuenta#mis-tarjetas");
+                waitForPageLoaded();
+                TestUtils.getScreenshot(driver, "myCards.jpg");
+                assert driver.findElement(By.xpath("//*[@id=\"__next\"]/div/div[1]/div/div[2]/a")).getText().contains("Mis tarjetas de crédito y débito");
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+            assert false;
+        }
+    }
+
+
 
     @Test
     public void testBadLogin() {
